@@ -67,6 +67,22 @@ export default function Home(){
             setCities(res)
         };
 
+        async function fetchPrices() {
+            const data = await fetch("https://cost-of-living-and-prices.p.rapidapi.com/prices", {
+                method: 'GET',
+                params: {city_name: 'Bratislava', country_name: 'Slovakia'},
+                headers: {
+                    'X-RapidAPI-Key': '272b755635mshc05a9ee8660a8dfp190c7cjsnc9e758afb6cb',
+                    'X-RapidAPI-Host': 'cost-of-living-and-prices.p.rapidapi.com'
+                }
+            });
+              
+            const res = await data.json()
+            console.log(res)
+            setPrices(res)
+        }; 
+
+        fetchPrices()
         fetchCities()
         fetchCountries()
     }, []);
@@ -94,29 +110,29 @@ export default function Home(){
             return countryName.includes(country.toLowerCase()) || capital.includes(country.toLowerCase());
         });
 
-        async function fetchPrices(city, country) {
-            try {
-              const data = await fetch("https://cities-cost-of-living-and-average-prices-api.p.rapidapi.com/cost_of_living", {
-                method: 'GET',
-                params: { country: 'uganda', city: 'kampala' },
-                headers: {
-                    'X-RapidAPI-Key': '272b755635mshc05a9ee8660a8dfp190c7cjsnc9e758afb6cb',
-                    'X-RapidAPI-Host': 'cities-cost-of-living-and-average-prices-api.p.rapidapi.com'
-                }
-              });
+        // async function fetchPrices(city, country) {
+        //     try {
+        //       const data = await fetch("https://cities-cost-of-living-and-average-prices-api.p.rapidapi.com/cost_of_living", {
+        //         method: 'GET',
+        //         params: { country: 'uganda', city: 'kampala' },
+        //         headers: {
+        //             'X-RapidAPI-Key': '272b755635mshc05a9ee8660a8dfp190c7cjsnc9e758afb6cb',
+        //             'X-RapidAPI-Host': 'cities-cost-of-living-and-average-prices-api.p.rapidapi.com'
+        //         }
+        //       });
               
-              const res = await data.json()
-              console.log(res)
-              setPrices(res)
-            } catch (err) {
-              console.error('Error fetching prices:', err)
-            }
-        };  
+        //       const res = await data.json()
+        //       console.log(res)
+        //       setPrices(res)
+        //     } catch (err) {
+        //       console.error('Error fetching prices:', err)
+        //     }
+        // };  
 
         if (filteredCountry.length > 0) {
             setInfo(filteredCountryInfo[0]);
             setCenter([filteredCountry[0].lat, filteredCountry[0].lng])
-            fetchPrices(filteredCountry[0].city_name, filteredCountry[0].country_name)
+            // fetchPrices(filteredCountry[0].city_name, filteredCountry[0].country_name)
         } else {
             setInfo(null);
         }
