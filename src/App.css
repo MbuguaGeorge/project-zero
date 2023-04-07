@@ -20,7 +20,9 @@ ul, h1, h2, h3, h4, h5{
 .navigation nav{
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
+    background-color: #FFF;
+    align-items: center;
 }
 
 .navigation nav ul{
@@ -42,6 +44,16 @@ ul, h1, h2, h3, h4, h5{
     color: #1e90ff;
     cursor: pointer;
     transition: .3s all;
+}
+
+.navigation nav .avatar{
+    margin-right: 40px;
+}
+
+.navigation nav .avatar img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
 
 
