@@ -150,7 +150,7 @@ export default function Home(){
                         center={center} 
                         zoom={7} 
                         scrollWheelZoom={true} 
-                        style={{height: '85vh', width: info ? '160vh' : '220vh'}}
+                        style={{height: '82vh', width: info ? '160vh' : '220vh'}}
                     >
                     <ChangeView center={center} />
                         <TileLayer
@@ -184,6 +184,10 @@ export default function Home(){
                     </MapContainer>
                 </div>
             </section>
+
+            <footer>
+                <h3 style={{textAlign: 'center'}}>Copyright © 2023. All Rights Reserved.</h3>
+            </footer>
         </div>
     )
 }
