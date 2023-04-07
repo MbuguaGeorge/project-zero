@@ -21,6 +21,10 @@ export default function About(){
 
                 </div>
             </section>
+
+            <footer>
+                <h3 style={{textAlign: 'center'}}>Copyright © 2023. All Rights Reserved.</h3>
+            </footer>
         </div>
     )
 }

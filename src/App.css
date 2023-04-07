@@ -138,12 +138,6 @@ ul, h1, h2, h3, h4, h5{
     align-items: center;
     margin-top: 80px;
 }
-/* 
-.contact-us{
-    background: url(../src/assets/img.jpg) center no-repeat;
-    height: 100vh;
-    width: 100%;
-} */
 
 .contact form h1{
     padding-bottom: 30px;
@@ -223,4 +217,54 @@ ul, h1, h2, h3, h4, h5{
     font-size: 16px;
     font-weight: 400;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+@media screen and (max-width: 480px){
+    body{
+        height: 100%;
+    }
+    .logo{
+        display: none;
+    }
+    .contact{
+      padding-left: 10px;
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .contact .message{
+      padding-top: 0;
+    }
+    .contact .message textarea{
+      height: 150px;
+      width: 350px;
+    }
+    .contact form{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .contact form .contact-first input[type='text'],.contact form .contact-first input[type='email']{
+      width: 350px;
+      padding: 18px 10px;
+      margin-bottom: 20px;
+      margin-right: 0;
+    }
+
+    .about-me{
+        margin: 20px 10px;
+    }
+
+    .about-me h1{
+        font-size: 3rem;
+    }
+
+    .about-me p{
+        width: 100%;
+    }
+    footer h3{
+        padding: 5px 0;
+        font-size: 16px;
+    }
 }

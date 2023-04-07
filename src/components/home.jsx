@@ -96,14 +96,12 @@ export default function Home(){
 
         async function fetchPrices(city, country) {
             try {
-              const data = await fetch("https://cost-of-living-and-prices.p.rapidapi.com/prices", {
+              const data = await fetch("https://cities-cost-of-living-and-average-prices-api.p.rapidapi.com/cost_of_living", {
                 method: 'GET',
-                params: { city_name: 'Kampala', country_name: 'Uganda' },
-                mode: 'cors',
+                params: { country: 'uganda', city: 'kampala' },
                 headers: {
-                  'X-RapidAPI-Key': 'f32f77d2a8msh99bedad440aa033p1780b7jsnc795046697e2',
-                  'X-RapidAPI-Host': 'cost-of-living-and-prices.p.rapidapi.com',
-                  'Access-Control-Allow-Origin': '*'
+                    'X-RapidAPI-Key': '272b755635mshc05a9ee8660a8dfp190c7cjsnc9e758afb6cb',
+                    'X-RapidAPI-Host': 'cities-cost-of-living-and-average-prices-api.p.rapidapi.com'
                 }
               });
               
@@ -113,13 +111,12 @@ export default function Home(){
             } catch (err) {
               console.error('Error fetching prices:', err)
             }
-        };
-        fetchPrices()      
+        };  
 
         if (filteredCountry.length > 0) {
             setInfo(filteredCountryInfo[0]);
             setCenter([filteredCountry[0].lat, filteredCountry[0].lng])
-            console.log(filteredCountry[0].city_name, filteredCountry[0].country_name)
+            fetchPrices(filteredCountry[0].city_name, filteredCountry[0].country_name)
         } else {
             setInfo(null);
         }

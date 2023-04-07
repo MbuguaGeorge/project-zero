@@ -19,6 +19,10 @@ export default function Contact(){
                     <input type='submit' value='SEND'/>
                 </form>
             </div>
+
+            <footer style={{position: 'abs'}}>
+                <h3 style={{textAlign: 'center'}}>Copyright © 2023. All Rights Reserved.</h3>
+            </footer>
         </div>
     )
 }
