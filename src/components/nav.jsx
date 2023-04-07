@@ -9,6 +9,9 @@ export default function Nav(){
                     <Link to="/about" style={{textDecoration: 'none', color: '#111'}}><li>About</li></Link>
                     <Link to="/contact" style={{textDecoration: 'none', color: '#111'}}><li>Contact</li></Link>
                 </ul>
+                <div className="avatar">
+                    <img src='' alt="avatar" />
+                </div>
             </nav>
         </div>
     )

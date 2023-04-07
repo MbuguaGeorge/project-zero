@@ -1,4 +1,13 @@
-body, html{
+body{
+    margin: 0;
+    padding: 0;
+    background: url(../src/assets/img.jpg) center no-repeat;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+}
+
+html{
     margin: 0;
     padding: 0;
 }
@@ -41,6 +50,7 @@ ul, h1, h2, h3, h4, h5{
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
+    background-color: #fff;
 }
 
 .home header form input[type="text"]{
@@ -64,6 +74,7 @@ ul, h1, h2, h3, h4, h5{
     display: flex;
     align-items: baseline;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    background-color: #FFF;
 }
 
 .home section .content .country-info:hover{
@@ -98,6 +109,10 @@ ul, h1, h2, h3, h4, h5{
     width: 100px;
 }
 
+.home section .content ul li{
+    list-style: none;
+}
+
 .popup{
     display: flex;
     justify-content: space-evenly;
@@ -111,8 +126,8 @@ ul, h1, h2, h3, h4, h5{
     align-items: center;
     margin-top: 80px;
 }
-
-/* .contact-us{
+/* 
+.contact-us{
     background: url(../src/assets/img.jpg) center no-repeat;
     height: 100vh;
     width: 100%;
@@ -154,7 +169,7 @@ ul, h1, h2, h3, h4, h5{
     margin-top: 10px;
     padding: 10px 35px;
     background-color: white;
-    color: crimson;
+    color: #1e90ff;
     outline: none;
     border: 1px solid #ddd;
     cursor: pointer;
@@ -165,8 +180,8 @@ ul, h1, h2, h3, h4, h5{
   
 .contact form input[type='submit']:hover{
     color: white;
-    background-color: crimson;
-    border: 1px solid crimson;
+    background-color: #1e90ff;
+    border: 1px solid #1e90ff;
     transition: .3s;
 }
 

@@ -45,7 +45,7 @@ export default function Home(){
             const data = await fetch("https://country-facts.p.rapidapi.com/all", {
                 method: 'GET',
                 headers: {
-                    'X-RapidAPI-Key': 'f32f77d2a8msh99bedad440aa033p1780b7jsnc795046697e2',
+                    'X-RapidAPI-Key': '272b755635mshc05a9ee8660a8dfp190c7cjsnc9e758afb6cb',
                     'X-RapidAPI-Host': 'country-facts.p.rapidapi.com'
                 }
             });
@@ -68,7 +68,7 @@ export default function Home(){
         };
 
         fetchCities()
-        // fetchCountries()
+        fetchCountries()
     }, []);
 
     function ChangeView({ center }) {
@@ -99,6 +99,7 @@ export default function Home(){
               const data = await fetch("https://cost-of-living-and-prices.p.rapidapi.com/prices", {
                 method: 'GET',
                 params: { city_name: 'Kampala', country_name: 'Uganda' },
+                mode: 'cors',
                 headers: {
                   'X-RapidAPI-Key': 'f32f77d2a8msh99bedad440aa033p1780b7jsnc795046697e2',
                   'X-RapidAPI-Host': 'cost-of-living-and-prices.p.rapidapi.com',
@@ -143,23 +144,7 @@ export default function Home(){
                 </form>
             </header>
 
-            <section>
-                {info &&
-                    <div className="content">
-                        <div className="country-info">
-                            <div className="dot"></div>
-                            <ul>
-                                <li>
-                                    <h2>{info.name.common}</h2>
-                                    <img src={info.flag} alt="flag" width="20"/>
-                                </li>
-                                <li>{info.capital[0]}</li>
-                                <li>{info.population}</li>
-                            </ul>
-                        </div>
-                    </div>
-                }
-                
+            <section>       
                 <div className="map">
                     <MapContainer 
                         center={center} 
@@ -178,9 +163,19 @@ export default function Home(){
                                     <div className="popup">
                                         <div className="dot"></div>
                                         <div className="city-info">
-                                            <h2>Kenya</h2>
-                                            <p>Information about the city</p>
-                                            <Bar data={chartData} options={options} />            
+                                            <div className="content">
+                                                <ul>
+                                                    <li style={{display: 'flex'}}>
+                                                        <h2 style={{marginRight: '50px'}}>{info ? info.name.common : 'Kenya'}</h2>
+                                                        {info && <img src={info.flag} alt="flag" width="20"/>}
+                                                    </li>
+                                                    <li>{info ? info.capital[0] : 'Nairobi'}</li>
+                                                    {info && <li>{info.population}</li>}
+                                                </ul>
+                                            </div>
+                                            <div className="bar-graph" style={{width: '260px', height: '160px'}}>
+                                                <Bar data={chartData} options={options} /> 
+                                            </div>           
                                         </div>
                                     </div>
                                 </Popup>
