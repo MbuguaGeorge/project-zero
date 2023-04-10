@@ -17,13 +17,13 @@ export default function Home(){
     const [center, setCenter] = useState([-1.292066, 36.821945]);
 
     const [info, setInfo] = useState(null);
-    const [prices, setPrices] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     const [chartData, setChartData] = useState({
         labels: ['Clothing', 'Markets', 'Healthcare'],
         datasets: [
           {
-            label: 'Price',
+            label: 'Category',
             data: [15, 20, 25],
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
@@ -38,7 +38,7 @@ export default function Home(){
             borderWidth: 1,
           },
         ],
-      });
+    });
 
     useEffect(() => {
         async function fetchCountries(){
@@ -67,22 +67,6 @@ export default function Home(){
             setCities(res)
         };
 
-        async function fetchPrices() {
-            const data = await fetch("https://cost-of-living-and-prices.p.rapidapi.com/prices", {
-                method: 'GET',
-                params: {city_name: 'Bratislava', country_name: 'Slovakia'},
-                headers: {
-                    'X-RapidAPI-Key': '272b755635mshc05a9ee8660a8dfp190c7cjsnc9e758afb6cb',
-                    'X-RapidAPI-Host': 'cost-of-living-and-prices.p.rapidapi.com'
-                }
-            });
-              
-            const res = await data.json()
-            console.log(res)
-            setPrices(res)
-        }; 
-
-        fetchPrices()
         fetchCities()
         fetchCountries()
     }, []);
@@ -110,35 +94,49 @@ export default function Home(){
             return countryName.includes(country.toLowerCase()) || capital.includes(country.toLowerCase());
         });
 
-        // async function fetchPrices(city, country) {
-        //     try {
-        //       const data = await fetch("https://cities-cost-of-living-and-average-prices-api.p.rapidapi.com/cost_of_living", {
-        //         method: 'GET',
-        //         params: { country: 'uganda', city: 'kampala' },
-        //         headers: {
-        //             'X-RapidAPI-Key': '272b755635mshc05a9ee8660a8dfp190c7cjsnc9e758afb6cb',
-        //             'X-RapidAPI-Host': 'cities-cost-of-living-and-average-prices-api.p.rapidapi.com'
-        //         }
-        //       });
+        async function fetchPrices(city) {
+            try {
+              const data = await fetch(`https://api.teleport.org/api/urban_areas/slug:${city}/scores/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+              });
               
-        //       const res = await data.json()
-        //       console.log(res)
-        //       setPrices(res)
-        //     } catch (err) {
-        //       console.error('Error fetching prices:', err)
-        //     }
-        // };  
+              const res = await data.json()
+              setCategories(res.categories)
+              const newLabels = res.categories.map(cat => cat.name)
+              const newData = res.categories.map(cat => cat.score_out_of_10)
+              const newColors = res.categories.map(cat => cat.color)
+
+              setChartData({
+                labels: newLabels,
+                datasets: [
+                    {
+                        label: 'Category',
+                        data: newData,
+                        backgroundColor: newColors,
+                        borderColor: newColors.map(color => color.replace('0.2', '1')),
+                        borderWidth: 1
+                    }
+                ]
+              })
+              
+            } catch (err) {
+              console.error('Error fetching prices:', err)
+            }
+        };  
 
         if (filteredCountry.length > 0) {
             setInfo(filteredCountryInfo[0]);
             setCenter([filteredCountry[0].lat, filteredCountry[0].lng])
-            // fetchPrices(filteredCountry[0].city_name, filteredCountry[0].country_name)
+            fetchPrices((filteredCountry[0].city_name).toLowerCase())
         } else {
             setInfo(null);
         }
     };
 
-    // console.log(prices)
+    console.log(categories)
 
     const options = {
        
@@ -186,7 +184,7 @@ export default function Home(){
                                                     {info && <li>{info.population}</li>}
                                                 </ul>
                                             </div>
-                                            <div className="bar-graph" style={{width: '260px', height: '160px'}}>
+                                            <div className="bar-graph" style={{width: '300px', height: '200px'}}>
                                                 <Bar data={chartData} options={options} /> 
                                             </div>           
                                         </div>
